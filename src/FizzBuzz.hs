@@ -20,9 +20,9 @@ module FizzBuzz
     , fizzBuzzFib
     ) where
 
-import Data.Semigroup ((<>),getOption)
-import Data.Maybe (fromMaybe)
+import Data.Semigroup (getOption)
 import Data.Numbers.Primes (isPrime)
+import ClassyPrelude
 
 import FizzTypes
 import Input
@@ -38,7 +38,7 @@ fizzbuzz i = Right $ fromMaybe (show i) $ getOption fizzbuzz'
 
 -- see https://wiki.haskell.org/The_Fibonacci_sequence#Fastest_Fib_in_the_West
 fibb :: Integer -> Either FizzError Integer
-fibb n = Right $ snd . foldl fib' (1, 0) . map (toEnum . fromIntegral) $ unfoldl divs n
+fibb n = Right $ snd . foldl' fib' (1, 0) . map (toEnum . fromIntegral) $ unfoldl divs n
   where
     unfoldl f x =
       case f x of

@@ -1,38 +1,103 @@
-import Test.Tasty
-import Test.Tasty.HUnit
-import Test.Tasty.SmallCheck
+{-# LANGUAGE OverloadedStrings, QuasiQuotes #-}
+module Main (main) where
+-- |
+-- -- Module:      src-test/Main.hs
+-- -- Copyright:   2016 Michael Litchard
+-- -- License:     BSD3
+-- -- Maintainer:  <Michael Litchard> <michael@schmong.org>
+-- -- 
+-- -- A few tests for fizzbuzz demo
 
-import Lib (inc)
+import           Data.Numbers.Primes (isPrime)
+
+import           Test.Hspec  (Spec,hspec,describe,it,shouldBe)
+import           Test.Hspec.QuickCheck (prop)
+
+import           Import
 
 main :: IO ()
-main = defaultMain $ testGroup "all-tests" tests
+main = do
+ hspec fzzbzz
+ hspec qcheck
+ hspec input
 
-tests :: [TestTree]
-tests =
-  [ testGroup "SmallCheck" scTests
-  , testGroup "Unit tests" huTests
-  ]
+input :: Spec
+input = do
+  describe "Clean Input, Correct Control Structure" $ do
+    it "returns (NoInput :: FibError)" $
+      fizzBuzzFib [] `shouldBe` (Left NoInput)
+    it "returns (OnlyOne :: FibError)" $
+      fizzBuzzFib ["10","20"] `shouldBe` (Left OnlyOne)
+    it "returns (NotAnInteger :: FibError)" $
+      fizzBuzzFib buffalo `shouldBe` (Left NotAnInteger)
 
-scTests :: [TestTree]
-scTests =
-  [ testProperty "inc == succ" prop_succ
-  , testProperty "inc . negate == negate . pred" prop_pred
-  ]
+-- https://en.wikipedia.org/wiki/Buffalo_buffalo_Buffalo_buffalo_buffalo_buffalo_Buffalo_buffalo
 
-huTests :: [TestTree]
-huTests =
-  [ testCase "Increment below TheAnswer" case_inc_below
-  , testCase "Decrement above TheAnswer" case_dec_above
-  ]
+buffalo :: [String]
+buffalo = ["Buffalo Buffalo Buffalo Buffalo Buffalo Buffalo Buffalo Buffalo"]
 
-prop_succ :: Int -> Bool
-prop_succ n = inc n == succ n
+fzzbzz :: Spec
+fzzbzz = do
+  describe "Fibonacci check" $
+    it "returns a list of integers each wrapped in a Right constructor" $
+      map fibb [1 .. 10] `shouldBe` fibs
 
-prop_pred :: Int -> Bool
-prop_pred n = inc (negate n) == negate (pred n)
+fibs :: [Either FizzError Integer]
+fibs =
+  [Right 1,Right 1,Right 2,Right 3,Right 5,Right 8,Right 13,Right 21,Right 34,Right 55]
 
-case_inc_below :: Assertion
-case_inc_below = inc 41 @?= (42 :: Int)
+qcheck :: Spec
+qcheck = do
+  describe "QuickCheck test fiz" $
+    prop "QuickCheck test" $ modfiz
 
-case_dec_above :: Assertion
-case_dec_above = negate (inc (negate 43)) @?= (42 :: Int)
+  describe "QuickCheck test fib" $
+    prop "QuickCheck test fib" $ testfib
+
+modfiz :: Integer -> Bool
+modfiz int
+  | int <= 0                                 = True
+  | int == 3                                 = test3
+  | int == 5                                 = test5
+  | int `mod` 15 == 0                        = testMod35
+  | int `mod` 3 == 0                         = testMod3
+  | int `mod` 5 == 0                         = testMod5
+  | isPrime int == True                      = testPrime
+  | otherwise                                = testRest
+      where
+        test3     =
+          Right "Buzz BuzzFizz" == fizzbuzz 3
+        test5     =
+          Right "Fizz BuzzFizz" == fizzbuzz 5
+        testMod3  =
+          Right "Buzz "             == fizzbuzz int
+        testMod5  =
+          Right "Fizz "             == fizzbuzz int
+        testMod35 =
+          Right "Buzz Fizz "        == fizzbuzz int
+        testPrime =
+          Right "BuzzFizz"      == fizzbuzz int
+        testRest  =
+          Right (show int)          == fizzbuzz int
+
+testfib :: Integer -> Bool
+testfib n =
+  case (fibb n) of
+    Left _ -> False
+    Right n' -> isFib n'
+
+isFib :: Integer -> Bool
+isFib n = n == a where (_, a, _) = unFib (1, 1) n
+
+unFib :: (Integer, Integer) -> Integer -> (Integer,Integer,Integer)
+unFib (a, b) n
+  | n < a = (0, 0, 1)
+  | n < e = (2*k, c, d)
+  | otherwise = (2*k + 1, e, f)
+      where
+        (k, c, d) = unFib (fibPlus (a, b) (a, b)) n
+        (e, f)    = fibPlus (a, b) (c, d)
+
+fibPlus :: (Integer, Integer) -> (Integer, Integer) -> (Integer,Integer)
+fibPlus (a, b) (c, d) = (bd - (b - a)*(d - c), a*c + bd)
+  where bd = b*d

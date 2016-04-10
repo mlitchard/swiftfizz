@@ -16,6 +16,7 @@ module Input
 
 import              Text.Read (readMaybe)
 import              Data.Either.Utils (maybeToEither)
+import              ClassyPrelude
 
 import              FizzTypes
 -- |
