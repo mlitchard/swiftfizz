@@ -11,7 +11,7 @@
 module Input
   ( 
     mustHaveOne
-  , convertToNatural
+  , convertToPInt
   ) where
 
 import              Text.Read (readMaybe)

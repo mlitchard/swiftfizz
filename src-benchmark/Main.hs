@@ -1,7 +1,7 @@
 import Criterion
 import Criterion.Main
 
-import Lib (inc)
+import Import
 
 main :: IO ()
-main = defaultMain [bench "inc 41" (whnf inc (41 :: Int))]
+main = defaultMain [bench "fizzbuzz 10" (whnf fizzbuzz (10 :: Integer))]

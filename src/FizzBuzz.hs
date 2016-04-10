@@ -66,5 +66,5 @@ fizzBuzzFib str =
   mapM fizzbuzz           =<<
   mapM fibb               =<<
   (\x -> Right [1 .. x])  =<<
-  convertToNatural        =<<
+  convertToPInt           =<<
   mustHaveOne str

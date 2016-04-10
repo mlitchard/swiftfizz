@@ -30,8 +30,8 @@ library
   hs-source-dirs:    . , src
   exposed-modules:   Import
   other-modules:     FizzTypes
-                   , FizzBuzz
                    , Input
+                   , FizzBuzz
   build-depends:     base >= 4.8 && < 5
                    , primes     == 0.2.1.0
                    , semigroups == 0.18.0.1
