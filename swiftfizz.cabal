@@ -1,0 +1,80 @@
+name:                swiftfizz
+version:             0.1.0.0
+synopsis:            FizzBuzz as specifed by https://gist.github.com/mookerji/ef85e76e8bbfb6539643
+description:         Please see README.md
+
+license:             ISC
+license-file:        LICENSE
+author:              Michael Litchard
+maintainer:          michael@schmong.org
+copyright:           © 2016 Michael Litchard
+homepage:            http://github.com/mlitchard/swiftfizz
+bug-reports:         http://github.com/mlitchard/swiftfizz/issues
+
+category:            Test
+build-type:          Simple
+stability:           alpha (experimental)
+cabal-version:       >=1.10
+
+extra-source-files:
+  README.md
+  stack.yaml
+
+source-repository head
+  type:     git
+  location: https://github.com/mlitchard/swiftfizz
+
+library
+  default-language:  Haskell2010
+  ghc-options:       -Wall -Werror -O2
+  hs-source-dirs:    . , src
+  exposed-modules:   Import
+  other-modules:     FizzTypes
+                   , FizzBuzz
+                   , Input
+  build-depends:     base >= 4.8 && < 5
+                   , primes     == 0.2.1.0
+                   , semigroups == 0.18.0.1
+                   , MissingH   == 1.3.0.1
+
+executable swiftfizz-exe
+  default-language:  Haskell2010
+  ghc-options:       -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
+  hs-source-dirs:    src-exe
+  main-is:           Main.hs
+  build-depends:     base >= 4.8 && < 5
+                   , swiftfizz
+
+test-suite swiftfizz-test
+  type:              exitcode-stdio-1.0
+  default-language:  Haskell2010
+  ghc-options:       -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
+  hs-source-dirs:    src-test
+  main-is:           Main.hs
+  build-depends:     base >= 4.8 && < 5
+                   , tasty >= 0.11
+                   , tasty-hunit >= 0.9
+                   , tasty-smallcheck >= 0.8
+                   , swiftfizz
+
+test-suite swiftfizz-doctest
+  type:              exitcode-stdio-1.0
+  default-language:  Haskell2010
+  ghc-options:       -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
+  hs-source-dirs:    src-doctest
+  main-is:           Main.hs
+  build-depends:     base >= 4.8 && < 5
+                   , doctest >=0.10
+                   , Glob >= 0.7
+                   , QuickCheck >= 2.5
+                   , swiftfizz
+
+benchmark swiftfizz-benchmark
+  type:              exitcode-stdio-1.0
+  default-language:  Haskell2010
+  ghc-options:       -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
+  hs-source-dirs:    src-benchmark
+  main-is:           Main.hs
+  build-depends:     base >= 4.8 && < 5
+                   , criterion >= 1.1
+                   , swiftfizz
