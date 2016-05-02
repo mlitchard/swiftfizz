@@ -12,7 +12,6 @@ import           Data.Numbers.Primes (isPrime)
 
 import           Test.Hspec  (Spec,hspec,describe,it,shouldBe)
 import           Test.Hspec.QuickCheck (prop)
-
 import           Import
 
 main :: IO ()
@@ -79,6 +78,9 @@ modfiz int
           Right "BuzzFizz"      == fizzbuzz int
         testRest  =
           Right (show int)          == fizzbuzz int
+
+-- Test to see if a given integer is a Fibonnacci number
+-- https://www.quora.com/What-is-the-most-efficient-algorithm-to-check-if-a-number-is-a-Fibonacci-Number
 
 testfib :: Integer -> Bool
 testfib n =
