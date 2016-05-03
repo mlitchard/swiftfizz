@@ -48,14 +48,14 @@ fibs =
 qcheck :: Spec
 qcheck = do
   describe "QuickCheck test fiz" $
-    prop "QuickCheck test" $ modfiz
+    property  "QuickCheck test" $ modfiz
 
   describe "QuickCheck test fib" $
-    prop "QuickCheck test fib" $ testfib
+    property "QuickCheck test fib" $ testfib
 
 modfiz :: Integer -> Bool
 modfiz int
-  | int <= 0                                 = True
+--  | int <= 0                                 = True
   | int == 3                                 = test3
   | int == 5                                 = test5
   | int `mod` 15 == 0                        = testMod35

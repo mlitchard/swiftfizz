@@ -42,6 +42,7 @@ library
 executable swiftfizz-exe
   default-language:  Haskell2010
   ghc-options:       -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
+  extensions:        NoImplicitPrelude
   hs-source-dirs:    src-exe
   main-is:           Main.hs
   build-depends:     base >= 4.8 && < 5
@@ -49,6 +50,7 @@ executable swiftfizz-exe
 
 test-suite swiftfizz-test
   type:              exitcode-stdio-1.0
+  extensions:        NoImplicitPrelude
   default-language:  Haskell2010
   ghc-options:       -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
   hs-source-dirs:    src-test
@@ -70,6 +72,7 @@ test-suite swiftfizz-doctest
                    , doctest >=0.10
                    , Glob >= 0.7
                    , QuickCheck >= 2.5
+                   , hspec >= 2.2.2
                    , swiftfizz
 
 benchmark swiftfizz-benchmark
