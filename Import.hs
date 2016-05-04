@@ -2,5 +2,11 @@ module Import
     ( module Import
     ) where
 
-import FizzBuzz           as Import (fizzBuzzFib)
-import FizzTypes          as Import ( prettyPrintFizzError )
+import FizzBuzz           as Import ( fizzbuzz
+                                    , fibb
+                                    , fizzBuzzFib 
+                                    )
+
+import FizzTypes          as Import ( FizzError (..)
+                                    , prettyPrintFizzError 
+                                    )

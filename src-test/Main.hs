@@ -10,9 +10,17 @@ module Main (main) where
 
 import           Data.Numbers.Primes (isPrime)
 
-import           Test.Hspec  (Spec,hspec,describe,it,shouldBe)
-import           Test.Hspec.QuickCheck (prop)
+import           Test.Hspec  ( Spec
+                             , hspec
+                             , describe
+                             , it
+                             , shouldBe
+                             )
+import           Test.Hspec.QuickCheck ( modifyMaxSuccess, prop )
+
+import           Test.QuickCheck (forAll,choose)
 import           Import
+import           BasicPrelude
 
 main :: IO ()
 main = do
@@ -47,15 +55,18 @@ fibs =
 
 qcheck :: Spec
 qcheck = do
-  describe "QuickCheck test fiz" $
-    modifyMaxSuccess (const 100) $ prop  "QuickCheck test" $ modfiz
+  describe "QuickCheck testing fizbuzz"     $
+    modifyMaxSuccess (const 1000)           $
+    prop  "Lowerbound: 0 Upperbound: 10000" $
+    forAll (choose (1, 10000)) modfiz
 
-  describe "QuickCheck test fib" $
-    modifyMaxSuccess (const 100) $ prop "QuickCheck test fib" $ testfib
+  describe "QuickCheck test fibonacci generator" $
+    modifyMaxSuccess (const 1000)                $
+    prop "Lowerbound: 0 Upperbound: 10000"       $
+    forAll (choose (1, 10000)) testfib
 
 modfiz :: Integer -> Bool
 modfiz int
---  | int <= 0                                 = True
   | int == 3                                 = test3
   | int == 5                                 = test5
   | int `mod` 15 == 0                        = testMod35
@@ -65,9 +76,9 @@ modfiz int
   | otherwise                                = testRest
       where
         test3     =
-          Right "Buzz BuzzFizz" == fizzbuzz 3
+          Right "Buzz BuzzFizz"     == fizzbuzz 3
         test5     =
-          Right "Fizz BuzzFizz" == fizzbuzz 5
+          Right "Fizz BuzzFizz"     == fizzbuzz 5
         testMod3  =
           Right "Buzz "             == fizzbuzz int
         testMod5  =
@@ -75,7 +86,7 @@ modfiz int
         testMod35 =
           Right "Buzz Fizz "        == fizzbuzz int
         testPrime =
-          Right "BuzzFizz"      == fizzbuzz int
+          Right "BuzzFizz"          == fizzbuzz int
         testRest  =
           Right (show int)          == fizzbuzz int
 

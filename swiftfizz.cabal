@@ -34,11 +34,11 @@ library
                    , Input
                    , FizzBuzz
   build-depends:     base >= 4.8 && < 5
-                   , primes         == 0.2.1.0
-                   , semigroups     == 0.18.0.1
-                   , MissingH       == 1.3.0.1
-                   , basic-prelude  == 0.5.0
-                   , text           == 1.2.2.0
+                   , primes         
+                   , semigroups     
+                   , MissingH       
+                   , basic-prelude  
+                   , text           
 
 executable swiftfizz-exe
   default-language:  Haskell2010
@@ -47,7 +47,7 @@ executable swiftfizz-exe
   hs-source-dirs:    src-exe
   main-is:           Main.hs
   build-depends:     base >= 4.8 && < 5
-                   , basic-prelude == 0.5.0
+                   , basic-prelude
                    , swiftfizz
 
 test-suite swiftfizz-test
@@ -59,23 +59,11 @@ test-suite swiftfizz-test
   main-is:           Main.hs
   build-depends:     base >= 4.8 && < 5
                    , swiftfizz
-                   , QuickCheck == 2.8.1
-                   , hspec      == 2.2.2
-                   , primes     == 0.2.1.0
-                   , MissingH   == 1.3.0.1
-
-test-suite swiftfizz-doctest
-  type:              exitcode-stdio-1.0
-  default-language:  Haskell2010
-  ghc-options:       -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
-  hs-source-dirs:    src-doctest
-  main-is:           Main.hs
-  build-depends:     base >= 4.8 && < 5
-                   , doctest >=0.10
-                   , Glob >= 0.7
-                   , QuickCheck >= 2.5
-                   , hspec >= 2.2.2
-                   , swiftfizz
+                   , QuickCheck   
+                   , hspec         
+                   , primes        
+                   , basic-prelude 
+                   , MissingH      
 
 benchmark swiftfizz-benchmark
   type:              exitcode-stdio-1.0
@@ -84,5 +72,5 @@ benchmark swiftfizz-benchmark
   hs-source-dirs:    src-benchmark
   main-is:           Main.hs
   build-depends:     base >= 4.8 && < 5
-                   , criterion >= 1.1
+                   , criterion
                    , swiftfizz

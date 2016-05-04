@@ -21,14 +21,14 @@ data FizzError
   | NotPInt
   | OnlyOne
   | NoInput
-    deriving Eq
+    deriving (Show,Eq)
 
 prettyPrintFizzError :: FizzError -> Text
 prettyPrintFizzError NotAnInteger = pack "not an integer"
 prettyPrintFizzError NotPInt      = pack "input needs to be zero or greater"
-prettyPrintFizzError OnlyOne      = pack ( "Just pass in one integer that decribes" ++
+prettyPrintFizzError OnlyOne      = pack ( "Just pass in one integer that decribes" <>
                                            " the upper bound fibonacci number."
                                          )
-prettyPrintFizzError NoInput      = pack ( "You need to pass in an integer that describes" ++ 
+prettyPrintFizzError NoInput      = pack ( "You need to pass in an integer that describes" <>
                                            " the upper bound fibonacci number."
                                          )
