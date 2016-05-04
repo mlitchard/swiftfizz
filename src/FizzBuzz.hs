@@ -1,4 +1,5 @@
 {-# LANGUAGE MonadComprehensions #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 -- |
 -- Module: FizzBuzz
@@ -20,17 +21,18 @@ module FizzBuzz
     , fizzBuzzFib
     ) where
 
-import Data.Semigroup (getOption)
+import Data.Semigroup (Option (..), getOption)
 import Data.Numbers.Primes (isPrime)
-import ClassyPrelude
+import BasicPrelude
 
 import FizzTypes
 import Input
 
 -- Based on http://dave.fayr.am/posts/2012-10-4-finding-fizzbuzz.html
-fizzbuzz :: Integer -> Either FizzError String
+fizzbuzz :: Integer -> Either FizzError Text
 fizzbuzz i = Right $ fromMaybe (show i) $ getOption fizzbuzz'
   where
+    fizzbuzz' :: Option Text 
     fizzbuzz' =
       ["Buzz "        | i `rem` 3 == 0] <>
       ["Fizz "        | i `rem` 5 == 0] <>
@@ -61,7 +63,7 @@ fibb n = Right $ snd . foldl' fib' (1, 0) . map (toEnum . fromIntegral) $ unfold
 -- (3) calculates first x in fibonnaci sequence
 -- (4) generates fizzbuzz output using (3)
 fizzBuzzFib :: [String]                 ->
-               Either FizzError [String]
+               Either FizzError [Text]
 fizzBuzzFib str =
   mapM fizzbuzz           =<<
   mapM fibb               =<<

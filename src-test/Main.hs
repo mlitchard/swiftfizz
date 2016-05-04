@@ -48,10 +48,10 @@ fibs =
 qcheck :: Spec
 qcheck = do
   describe "QuickCheck test fiz" $
-    property  "QuickCheck test" $ modfiz
+    modifyMaxSuccess (const 100) $ prop  "QuickCheck test" $ modfiz
 
   describe "QuickCheck test fib" $
-    property "QuickCheck test fib" $ testfib
+    modifyMaxSuccess (const 100) $ prop "QuickCheck test fib" $ testfib
 
 modfiz :: Integer -> Bool
 modfiz int

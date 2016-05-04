@@ -10,9 +10,11 @@ module FizzTypes
   ( 
     -- captures error outcomes
     FizzError  (..)
+  , prettyPrintFizzError
   ) where
 
-import ClassyPrelude
+import BasicPrelude
+import Data.Text (pack) 
 
 data FizzError
   = NotAnInteger
@@ -21,10 +23,12 @@ data FizzError
   | NoInput
     deriving Eq
 
-instance Show FizzError where
-  show NotAnInteger = "not an integer"
-  show NotPInt      = "input needs to be zero or greater"
-  show OnlyOne      = "Just pass in one integer that decribes" ++
-                    " the upper bound fibonacci number."
-  show NoInput      = "You need to pass in an integer that describes" ++ 
-                    " the upper bound fibonacci number."
+prettyPrintFizzError :: FizzError -> Text
+prettyPrintFizzError NotAnInteger = pack "not an integer"
+prettyPrintFizzError NotPInt      = pack "input needs to be zero or greater"
+prettyPrintFizzError OnlyOne      = pack ( "Just pass in one integer that decribes" ++
+                                           " the upper bound fibonacci number."
+                                         )
+prettyPrintFizzError NoInput      = pack ( "You need to pass in an integer that describes" ++ 
+                                           " the upper bound fibonacci number."
+                                         )

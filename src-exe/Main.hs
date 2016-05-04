@@ -1,10 +1,10 @@
 
 import              System.Environment ( getArgs )
+import              BasicPrelude hiding (getArgs)
 
-import              Import
-
+import              Import 
 
 main :: IO ()
-main = do
+main = do -- putStrLn $ pack ("out of order\n")
   input <- getArgs
-  putStrLn $ either show (unlines . (map show)) $ fizzBuzzFib input
+  putStrLn $ either prettyPrintFizzError unlines $ fizzBuzzFib input

@@ -2,5 +2,5 @@ module Import
     ( module Import
     ) where
 
-import FizzTypes            as Import 
-import FizzBuzz             as Import
+import FizzBuzz           as Import (fizzBuzzFib)
+import FizzTypes          as Import ( prettyPrintFizzError )
