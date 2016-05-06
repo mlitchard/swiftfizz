@@ -42,23 +42,32 @@ fizzbuzz i = Right $ fromMaybe (show i) $ getOption fizzbuzz'
 
 
 
--- fibb :: Integer -> Either FizzError Integer
--- fibb n = Right $ snd . foldl' fib' (1, 0) . map (toEnum . fromIntegral) $ unfoldl divs n
---  where
---    unfoldl f x =
---      case f x of
---        Nothing     -> []
---        Just (u, v) -> unfoldl f v ++ [u]
+fibb :: Integer -> Either FizzError Integer
+fibb n = Right $ snd . foldl' fib' (1, 0) . map (toEnum . fromIntegral) $ unfoldl divs n
+  where
+    unfoldl f x =
+      case f x of
+        Nothing     -> []
+        Just (u, v) -> unfoldl f v ++ [u]
 
---    divs 0 = Nothing
---    divs k = Just (uncurry (flip (,)) (k `divMod` 2))
+    divs 0 = Nothing
+    divs k = Just (uncurry (flip (,)) (k `divMod` 2))
 
---    fib' (f, g) p
---      | p         = (f*(f+c*g), f^c + g^c)
---      | otherwise = (f^c+g^c,   g*(c*f-g))
---      where
---        c :: Integer
---        c = 2
+    fib' (f, g) p
+      | p         = (f*(f+c*g), f^c + g^c)
+      | otherwise = (f^c+g^c,   g*(c*f-g))
+      where
+        c :: Integer
+        c = 2
+
+-- The `where` clause solves below error
+-- Warning:
+--    Defaulting the following constraint(s) to type ‘Integer’
+--      (Integral b0) arising from a use of ‘^’ at src/FizzBuzz.hs:57:34
+--      (Num b0) arising from the literal ‘2’ at src/FizzBuzz.hs:57:35
+--    In the first argument of ‘(+)’, namely ‘f ^ 2’
+--    In the expression: f ^ 2 + g ^ 2
+--    In the expression: (f * (f + 2 * g), f ^ 2 + g ^ 2)
 
 -- Driver function performs following
 -- (1) checks that input is proper
