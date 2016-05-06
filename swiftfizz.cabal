@@ -10,11 +10,10 @@ maintainer:          michael@schmong.org
 copyright:           © 2016 Michael Litchard
 homepage:            http://github.com/mlitchard/swiftfizz
 bug-reports:         http://github.com/mlitchard/swiftfizz/issues
-
 category:            Test
 build-type:          Simple
 stability:           alpha (experimental)
-cabal-version:       >=1.10
+cabal-version:       >=1.22
 
 extra-source-files:
   README.md
@@ -25,14 +24,19 @@ source-repository head
   location: https://github.com/mlitchard/swiftfizz
 
 library
-  default-language:  Haskell2010
-  ghc-options:       -Wall -Werror -O2
-  hs-source-dirs:    . , src, src-exe
-  exposed-modules:   Import
-  extensions:        NoImplicitPrelude
-  other-modules:     FizzTypes
-                   , Input
-                   , FizzBuzz
+  default-language:   Haskell2010
+  ghc-options:        -Wall -Werror -O2
+  hs-source-dirs:     . , src 
+
+  default-extensions: NoImplicitPrelude
+  other-extensions:   MonadComprehensions
+                    , OverloadedStrings
+  
+  exposed-modules: FizzWrapper 
+  other-modules:   FizzTypes
+                 , Input
+                 , FizzBuzz
+
   build-depends:     base >= 4.8 && < 5
                    , primes         
                    , semigroups     
@@ -41,26 +45,43 @@ library
                    , text           
 
 executable swiftfizz-exe
-  default-language:  Haskell2010
-  ghc-options:       -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
-  extensions:        NoImplicitPrelude
+  default-language: Haskell2010
+  ghc-options:      -Wall -Werror -O2 -threaded -rtsopts -with-rtsopts=-N
+  default-extensions: NoImplicitPrelude
   hs-source-dirs:    src-exe
   main-is:           Main.hs
   build-depends:     base >= 4.8 && < 5
                    , basic-prelude
+                   , text
                    , swiftfizz
 
 test-suite swiftfizz-test
-  type:              exitcode-stdio-1.0
-  extensions:        NoImplicitPrelude
-  default-language:  Haskell2010
+  type:               exitcode-stdio-1.0
+  default-extensions:  NoImplicitPrelude
+  other-extensions:    OverloadedStrings
+
+  default-language:   Haskell2010
   ghc-options:       -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
-  hs-source-dirs:    src-test
+  hs-source-dirs:    src
+                   , src-test
+
   main-is:           Main.hs
+  other-modules:     FizzBuzz
+                   , FizzTypes
+                   , Input
+                   , PropTests.PropImports
+                   , PropTests.Fibonacci
+                   , PropTests.FizzBuzz
+                   , UnitTests.UnitImports
+                   , UnitTests.Fibonacci
+                   , UnitTests.Input
+
   build-depends:     base >= 4.8 && < 5
                    , swiftfizz
                    , QuickCheck   
-                   , hspec         
+                   , hspec
+                   , semigroups
+                   , text         
                    , primes        
                    , basic-prelude 
                    , MissingH      
@@ -68,9 +89,20 @@ test-suite swiftfizz-test
 benchmark swiftfizz-benchmark
   type:              exitcode-stdio-1.0
   default-language:  Haskell2010
-  ghc-options:       -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
-  hs-source-dirs:    src-benchmark
+  default-extensions:  NoImplicitPrelude
+  ghc-options:       -Wall -rtsopts
+  hs-source-dirs:    src, src-benchmark
   main-is:           Main.hs
+  other-modules:     PropImports
+                   , UnitImports
+                   , FizzBuzz
+
   build-depends:     base >= 4.8 && < 5
                    , criterion
+                   , primes
+                   , semigroups
+                   , MissingH
+                   , basic-prelude
+                   , text
+
                    , swiftfizz

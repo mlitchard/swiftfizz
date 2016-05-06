@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module: Input
 -- Copyright: Copyright (C) 2015 Michael Litchard
@@ -14,24 +15,26 @@ module Input
   , convertToPInt
   ) where
 
-import              Text.Read (readMaybe)
-import              Data.Either.Utils (maybeToEither)
 import              BasicPrelude
 
+import              Text.Read (readMaybe)
+import              Data.Either.Utils (maybeToEither)
+import              Data.Text (unpack) 
 import              FizzTypes
 -- |
 -- takes String and returns either an error or positive Integer
 
-convertToPInt :: String -> Either FizzError Integer
-convertToPInt str =
+convertToPInt :: Text -> Either FizzError Integer
+convertToPInt input =
   isPInt =<< toDigit
     where
-      toDigit = maybeToEither NotAnInteger (readMaybe str)
+      toDigit = maybeToEither NotAnInteger $ (readMaybe . unpack) input
       isPInt int = boolToEither (int >= 0) NotPInt int
+      
 
 -- |
 -- checks to see if number of arguments is correct
-mustHaveOne :: [String] -> Either FizzError String
+mustHaveOne :: [Text] -> Either FizzError Text
 mustHaveOne (arg:[]) = Right arg
 mustHaveOne []       = Left NoInput
 mustHaveOne _        = Left OnlyOne
