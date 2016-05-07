@@ -6,14 +6,11 @@ prop_fib :: Spec
 prop_fib = do
   describe "QuickCheck test fibonacci generator" $
     modifyMaxSuccess (const 1000)                $
-    prop "Lowerbound: 0 Upperbound: 10000"       $
+    prop "Lowerbound: 1 Upperbound: 10000"       $
     forAll (choose (1, 10000)) testfib
 
 testfib :: Integer -> Bool
-testfib n =
-  case (fibb n) of
-    Left _ -> False
-    Right n' -> isFib n'
+testfib = isFib . fibb
 
 isFib :: Integer -> Bool
 isFib n = n == a where (_, a, _) = unFib (1, 1) n

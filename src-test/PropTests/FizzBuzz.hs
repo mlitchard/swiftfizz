@@ -23,16 +23,16 @@ modfiz int
   | otherwise                                = testRest
       where
         test3     =
-          Right "Buzz BuzzFizz"     == fizzbuzz 3
+          "Buzz BuzzFizz"     == fizzbuzz 3
         test5     =
-          Right "Fizz BuzzFizz"     == fizzbuzz 5
+          "Fizz BuzzFizz"     == fizzbuzz 5
         testMod3  =
-          Right "Buzz "             == fizzbuzz int
+          "Buzz "             == fizzbuzz int
         testMod5  =
-          Right "Fizz "             == fizzbuzz int
+          "Fizz "             == fizzbuzz int
         testMod35 =
-          Right "Buzz Fizz "        == fizzbuzz int
+          "Buzz Fizz "        == fizzbuzz int
         testPrime =
-          Right "BuzzFizz"          == fizzbuzz int
+          "BuzzFizz"          == fizzbuzz int
         testRest  =
-          Right (show int)          == fizzbuzz int 
+          (show int)          == fizzbuzz int 

@@ -9,3 +9,4 @@ import           Test.Hspec   as UnitTests.UnitImports ( it
                                                        )
 import           FizzBuzz     as UnitTests.UnitImports
 import           FizzTypes    as UnitTests.UnitImports
+import           Input        as UnitTests.UnitImports
