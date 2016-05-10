@@ -1,16 +1,25 @@
-module PropTests.Fibonacci ( prop_fib ) where
+-- |
+-- Module: PropTests.Fibonacci
+-- Copyright: Copyright (C) 2016 Michael Litchard
+-- License: LGPL-3
+-- Maintainer: Michael Litchard <michael@schmong.org>
+-- Stability: experimental
+-- Portability: portable
+  
+-- Fibonacci property tests
+module PropTests.Fibonacci ( propFib ) where
 
 import           PropTests.PropImports
 
-prop_fib :: Spec
-prop_fib = do
-  describe "QuickCheck test fibonacci generator" $
-    modifyMaxSuccess (const 1000)                $
-    prop "Lowerbound: 1 Upperbound: 10000"       $
-    forAll (choose (1, 10000)) testfib
 
-testfib :: Integer -> Bool
-testfib = isFib . fibb
+propFib :: Integer -> Spec
+propFib ub = do
+  describe "QuickCheck test fibonacci generator" $
+    modifyMaxSuccess (const 10000)                $
+    prop "Lowerbound: 0 Upperbound: 10000"       $
+    forAll fibNumber isFib
+  where
+    fibNumber = elements $ fibSeq ub
 
 isFib :: Integer -> Bool
 isFib n = n == a where (_, a, _) = unFib (1, 1) n

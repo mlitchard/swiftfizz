@@ -1,10 +1,10 @@
 {-# LANGUAGE OverloadedStrings #-}
-module UnitTests.Input ( unit_input ) where
+module UnitTests.Input ( unitInput ) where
 
 import           UnitTests.UnitImports
 
-unit_input :: Spec
-unit_input = do
+unitInput :: Spec
+unitInput = do
   describe "Correct Response To Bad Input" $ do
     it "returns (NoInput :: FibError)" $
       input [] `shouldBe` (Left NoInput)

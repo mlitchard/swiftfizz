@@ -24,8 +24,8 @@ source-repository head
   location: https://github.com/mlitchard/swiftfizz
 
 library
-  default-language:   Haskell2010
-  ghc-options:        -Wall -Werror -O2
+  default-language: Haskell2010
+  ghc-options:      -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
   hs-source-dirs:     . , src 
 
   default-extensions: NoImplicitPrelude
@@ -34,19 +34,22 @@ library
   
   exposed-modules: FizzWrapper 
   other-modules:   FizzTypes
-                 , Input
+                 , FizzInput
                  , FizzBuzz
+                 , FizzFib
 
   build-depends:     base >= 4.8 && < 5
                    , primes         
                    , semigroups     
                    , MissingH       
                    , basic-prelude  
-                   , text           
+                   , text
+                   , deepseq
+                   , parallel           
 
 executable swiftfizz-exe
   default-language: Haskell2010
-  ghc-options:      -Wall -Werror -O2 -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -eventlog -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
   default-extensions: NoImplicitPrelude
   hs-source-dirs:    src-exe
   main-is:           Main.hs
@@ -68,7 +71,8 @@ test-suite swiftfizz-test
   main-is:           Main.hs
   other-modules:     FizzBuzz
                    , FizzTypes
-                   , Input
+                   , FizzFib
+                   , FizzInput
                    , PropTests.PropImports
                    , PropTests.Fibonacci
                    , PropTests.FizzBuzz
@@ -84,19 +88,18 @@ test-suite swiftfizz-test
                    , text         
                    , primes        
                    , basic-prelude 
-                   , MissingH      
+                   , MissingH
+                   , parallel      
 
 benchmark swiftfizz-benchmark
   type:              exitcode-stdio-1.0
-  default-language:  Haskell2010
-  default-extensions:  NoImplicitPrelude
-  ghc-options:       -Wall -rtsopts
-  hs-source-dirs:    src, src-benchmark
+  default-language: Haskell2010
+  default-extensions: NoImplicitPrelude
+  ghc-options: -Wall -rtsopts
+  hs-source-dirs: src, src-benchmark
   main-is:           Main.hs
-  other-modules:     PropImports
-                   , UnitImports
-                   , FizzBuzz
-
+  other-modules:     FizzBuzz  
+                   , FizzFib
   build-depends:     base >= 4.8 && < 5
                    , criterion
                    , primes
@@ -104,5 +107,5 @@ benchmark swiftfizz-benchmark
                    , MissingH
                    , basic-prelude
                    , text
-
                    , swiftfizz
+                   , parallel

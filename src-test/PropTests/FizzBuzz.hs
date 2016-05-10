@@ -1,19 +1,19 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module PropTests.FizzBuzz ( prop_fizz ) where
+module PropTests.FizzBuzz ( propFizz ) where
 
 import           Data.Numbers.Primes (isPrime)
 import           PropTests.PropImports
 
-prop_fizz :: Spec
-prop_fizz = do
+propFizz :: Spec
+propFizz = do
   describe "QuickCheck testing fizbuzz"     $
-    modifyMaxSuccess (const 1000)           $
+    modifyMaxSuccess (const 10000)           $
     prop  "Lowerbound: 0 Upperbound: 10000" $
-    forAll (choose (1, 10000)) modfiz
+    forAll (choose (0, 100000)) modFiz
 
-modfiz :: Integer -> Bool
-modfiz int
+modFiz :: Integer -> Bool
+modFiz int
   | int == 3                                 = test3
   | int == 5                                 = test5
   | int `mod` 15 == 0                        = testMod35
