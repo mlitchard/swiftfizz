@@ -1,17 +1,32 @@
 {-# LANGUAGE OverloadedStrings #-}
+-- |
+-- Module: PropTests.FizzBuzz
+-- Copyright: Copyright (C) 2016 Michael Litchard
+-- License: LGPL-3
+-- Maintainer: Michael Litchard <michael@schmong.org>
+-- Stability: experimental
+-- Portability: portable
+-- Property tests for FizzBuzz
 
 module PropTests.FizzBuzz ( propFizz ) where
 
 import           Data.Numbers.Primes (isPrime)
 import           PropTests.PropImports
 
-propFizz :: Spec
-propFizz = do
+-- |
+-- tests that FizzBuzz is doing the right thing
+propFizz :: Int -> Spec
+propFizz ub = do
   describe "QuickCheck testing fizbuzz"     $
-    modifyMaxSuccess (const 10000)           $
-    prop  "Lowerbound: 0 Upperbound: 10000" $
-    forAll (choose (0, 100000)) modFiz
+    modifyMaxSuccess (const ub)             $
+    prop propMsg                            $
+    forAll (choose (0, ub)) modFiz
+  where
+    propMsg = "Lowerbound: 0 Upperbound: " <> showUB
+    showUB = (unpack . show) ub
 
+-- |
+-- The actual property test
 modFiz :: Integer -> Bool
 modFiz int
   | int == 3                                 = test3

@@ -3,20 +3,19 @@
 -- Copyright:   2016 Michael Litchard
 -- License:     BSD3
 -- Maintainer:  <Michael Litchard> <michael@schmong.org>
-
 -- A few tests for fizzbuzz demo
 module Main (main) where
 
--- A few tests for fizzbuzz demo
+import BasicPrelude
+import Test.Hspec (hspec)
 
-import           BasicPrelude
-import           Test.Hspec (hspec)
+import PropTests.Fibonacci
+import PropTests.FizzBuzz
+import UnitTests.Fibonacci
+import UnitTests.Input
 
-import           PropTests.Fibonacci
-import           PropTests.FizzBuzz
-import           UnitTests.Fibonacci
-import           UnitTests.Input
-
+-- |
+-- Tests are first divided up into unit and property tests
 main :: IO ()
 main = do
   hspec unitFib
@@ -24,5 +23,5 @@ main = do
   hspec $ propFib upper_bound
   hspec propFizz
 
-upper_bound :: Integer
+upper_bound :: Int
 upper_bound = 100000

@@ -1,11 +1,12 @@
 -- |
 -- Module: FizzWrapper
--- Copyright: Copyright (C) 2015 Michael Litchard
+-- Copyright: Copyright (C) 2016 Michael Litchard
 -- License: LGPL-3
 -- Maintainer: Michael Litchard <michael@schmong.org>
 -- Stability: experimental
 -- Portability: portable
-
+-- Driver function
+ 
 module FizzWrapper (fizzWrapper) where
 
 import BasicPrelude

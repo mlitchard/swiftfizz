@@ -1,7 +1,18 @@
+-- |
+-- Module: UnitTests.Fibonacci
+-- Copyright: Copyright (C) 2016 Michael Litchard
+-- License: LGPL-3
+-- Maintainer: Michael Litchard <michael@schmong.org>
+-- Stability: experimental
+-- Portability: portable
+
 module UnitTests.Fibonacci ( unitFib ) where
 
 import           UnitTests.UnitImports
 
+-- |
+-- quick sanity test for Fibonacci function
+-- property test does the real work
 unitFib :: Spec
 unitFib = do
   describe "Fibonacci check" $
@@ -24,8 +35,9 @@ unitFib = do
 --      ‘it "first 10 fibonacci numbers"
 --       $ genericTake 10 fibb `shouldBe` fibs’
 
-sample :: Integer
+sample :: Int
 sample = 10
+
 fibs :: [Integer]
 fibs = [0,1,1,2,3,5,8,13,21,34]
   

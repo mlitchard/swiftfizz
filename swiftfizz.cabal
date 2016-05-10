@@ -25,7 +25,7 @@ source-repository head
 
 library
   default-language: Haskell2010
-  ghc-options:      -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
   hs-source-dirs:     . , src 
 
   default-extensions: NoImplicitPrelude
@@ -39,17 +39,15 @@ library
                  , FizzFib
 
   build-depends:     base >= 4.8 && < 5
-                   , primes         
+                   , arithmoi        
                    , semigroups     
                    , MissingH       
                    , basic-prelude  
                    , text
-                   , deepseq
-                   , parallel           
 
 executable swiftfizz-exe
   default-language: Haskell2010
-  ghc-options: -eventlog -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
   default-extensions: NoImplicitPrelude
   hs-source-dirs:    src-exe
   main-is:           Main.hs
@@ -102,7 +100,7 @@ benchmark swiftfizz-benchmark
                    , FizzFib
   build-depends:     base >= 4.8 && < 5
                    , criterion
-                   , primes
+                   , arithmoi
                    , semigroups
                    , MissingH
                    , basic-prelude

@@ -13,7 +13,7 @@ main = defaultMain $ fizzbuzzTests 1000 -- [ bench "fizzbuzz 10" (whnf fizzbuzz 
 --                   , bench "fizzbuzz 1000" (whnf fizzbuzz (1000 :: Integer))
 --                   ]
 
-fizzbuzzTests :: Integer -> [Benchmark]
+fizzbuzzTests :: Int -> [Benchmark]
 fizzbuzzTests amount =
   [ bgroup "fizzbuzz performance test"
      [

@@ -1,3 +1,4 @@
+{-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module: PropTests.Fibonacci
 -- Copyright: Copyright (C) 2016 Michael Litchard
@@ -9,17 +10,25 @@
 -- Fibonacci property tests
 module PropTests.Fibonacci ( propFib ) where
 
-import           PropTests.PropImports
+import Data.Text (unpack)
+import PropTests.PropImports
 
-
-propFib :: Integer -> Spec
+-- | Tests that fibonacci generator is generating correct Fibonacci 
+-- sequence up to upper bound.
+propFib :: Int -> Spec
 propFib ub = do
-  describe "QuickCheck test fibonacci generator" $
-    modifyMaxSuccess (const 10000)                $
-    prop "Lowerbound: 0 Upperbound: 10000"       $
+  describe "QuickCheck test fibonacci generator"   $
+    modifyMaxSuccess (const ub)                    $
+    prop propMsg                                   $
     forAll fibNumber isFib
   where
     fibNumber = elements $ fibSeq ub
+    propMsg   = "Lowerbound: 0 Upperbound: " <> showUB
+    showUB = (unpack . show) ub
+
+-- |
+-- This is a Fibonacci number tester I found here
+-- https://www.quora.com/What-is-the-most-efficient-algorithm-to-check-if-a-number-is-a-Fibonacci-Number
 
 isFib :: Integer -> Bool
 isFib n = n == a where (_, a, _) = unFib (1, 1) n

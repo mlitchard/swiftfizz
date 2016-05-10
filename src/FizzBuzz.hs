@@ -2,12 +2,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 -- |
 -- Module: FizzBuzz
--- Copyright: Copyright (C) 2015 Michael Litchard
+-- Copyright: Copyright (C) 2016 Michael Litchard
 -- License: LGPL-3
 -- Maintainer: Michael Litchard <michael@schmong.org>
 -- Stability: experimental
 -- Portability: portable
---  
 -- Fizzbuzz generation functions
 
 module FizzBuzz
@@ -19,15 +18,13 @@ module FizzBuzz
   ) where
 
 import BasicPrelude
-import Data.Numbers.Primes (isPrime)
 import Data.Semigroup (Option (..), option) 
-import Control.Parallel.Strategies
-
+import Math.NumberTheory.Primes.Testing (isPrime)
 import FizzFib
 
--- |
-fizzBuzzFib :: Integer -> [Text]
-fizzBuzzFib ub = parMap rdeepseq fizzbuzz $! fibSeq ub
+-- | 
+fizzBuzzFib :: Int -> [Text]
+fizzBuzzFib ub = map fizzbuzz $ fibSeq ub
 
 -- | Based on http://dave.fayr.am/posts/2012-10-4-finding-fizzbuzz.html
 -- optimized for scalability and maintainability

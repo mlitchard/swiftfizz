@@ -1,6 +1,6 @@
 -- |
 -- Module: FizzTypes
--- Copyright: Copyright (C) 2015 Michael Litchard
+-- Copyright: Copyright (C) 2016 Michael Litchard
 -- License: LGPL-3
 -- Maintainer: Michael Litchard <mlitchard@schmong.org>
 -- Stability: experimental
@@ -15,6 +15,7 @@ module FizzTypes
   ) where
 
 import BasicPrelude
+
 import Data.Text (pack) 
 
 -- | Captures everything that might be wrong with the input
