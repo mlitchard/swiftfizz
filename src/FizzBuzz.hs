@@ -25,7 +25,7 @@ import Control.Parallel.Strategies
 
 import FizzFib
 
--- | lazy evaluation gives us O(n) for getFib
+-- |
 fizzBuzzFib :: Integer -> [Text]
 fizzBuzzFib ub = parMap rdeepseq fizzbuzz $! fibSeq ub
 
