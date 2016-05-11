@@ -6,29 +6,30 @@ Swiftfizz is an implementation of FizzBuzz, using the specification given in
 https://gist.github.com/mookerji/ef85e76e8bbfb6539643
 
 To Use:
+cd $HOME
+git clone git@github.com:mlitchard/swiftfizz.git
+cd swiftfizz
 
 With Docker
 
+docker build -t swiftfizz .
+sudo docker run -t --name swiftfizz_run swiftfizz $FOO 
+where foo is the nth Fibonacci number. I've gone as high as 5000th.
 
 With Stack
 
+stack install
+$HOME/.local/bin/swiftfizz-exe $FOO
+where foo is the nth Fibonacci number. I've gone as high as 5000th.
 
 Testing
 
-        Tue May 10 23:29 2016 Time and Allocation Profiling Report  (Final)
+Included are the following files from the results of various tests
 
-           swiftfizz-exe +RTS -N -p -RTS 1000
+Criterion    - swiftfizz-benchmark.html
+GHC profiler - swiftfizz-exe.hp swiftfizz-exe.prof
 
-        total time  =        0.11 secs   (107 ticks @ 1000 us, 1 processor)
-        total alloc =  65,533,288 bytes  (excludes profiling overheads)
+You may follow the Travis CI link to see the results of some property
+and unit tests. Or, to play with the tests yourself, start with:
 
-COST CENTRE      MODULE                                         %time %alloc
-
-powerModInteger' Math.NumberTheory.Moduli                        72.0   63.8
-lucasTest        Math.NumberTheory.Primes.Testing.Probabilistic   9.3    9.3
-isStrongFermatPP Math.NumberTheory.Primes.Testing.Probabilistic   5.6    5.7
-isPrime          Math.NumberTheory.Primes.Testing.Probabilistic   4.7    2.4
-main             Main                                             1.9    7.1
-fizzbuzz         FizzBuzz                                         1.9    5.7
-unstream/resize  Data.Text.Internal.Fusion                        1.9    0.7
-fizzWrapper      FizzWrapper                                      0.9    4.1
+stack test

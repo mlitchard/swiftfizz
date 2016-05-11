@@ -10,9 +10,9 @@
 
 module PropTests.FizzBuzz ( propFizz ) where
 
-import Data.Numbers.Primes (isPrime)
 import Data.Text (unpack)
- 
+import Math.NumberTheory.Primes.Testing (isPrime) 
+
 import PropTests.PropImports
 
 -- |
@@ -43,7 +43,7 @@ modFiz int
   | int `mod` 15 == 0                        = testMod35
   | int `mod` 3 == 0                         = testMod3
   | int `mod` 5 == 0                         = testMod5
-  | isPrime int == True                      = testPrime
+  | isPrime integer == True                  = testPrime
   | otherwise                                = testRest
       where
         integer = toInteger int

@@ -33,17 +33,17 @@ library
                     , OverloadedStrings
   
   exposed-modules: FizzWrapper 
-  other-modules:   FizzTypes
-                 , FizzInput
-                 , FizzBuzz
+  other-modules:   FizzBuzz
                  , FizzFib
+                 , FizzInput
+                 , FizzTypes
 
   build-depends:     base >= 4.8 && < 5
-                   , arithmoi        
-                   , semigroups     
-                   , MissingH       
-                   , basic-prelude  
-                   , text
+                   , arithmoi
+                   , basic-prelude
+                   , MissingH
+                   , semigroups
+                   , text     
 
 executable swiftfizz-exe
   default-language: Haskell2010
@@ -57,37 +57,36 @@ executable swiftfizz-exe
                    , swiftfizz
 
 test-suite swiftfizz-test
-  type:               exitcode-stdio-1.0
+  type:                exitcode-stdio-1.0
   default-extensions:  NoImplicitPrelude
   other-extensions:    OverloadedStrings
 
   default-language:   Haskell2010
-  ghc-options:       -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
   hs-source-dirs:    src
                    , src-test
 
   main-is:           Main.hs
   other-modules:     FizzBuzz
-                   , FizzTypes
                    , FizzFib
                    , FizzInput
-                   , PropTests.PropImports
+                   , FizzTypes
                    , PropTests.Fibonacci
                    , PropTests.FizzBuzz
-                   , UnitTests.UnitImports
+                   , PropTests.PropImports
                    , UnitTests.Fibonacci
                    , UnitTests.Input
+                   , UnitTests.UnitImports
 
   build-depends:     base >= 4.8 && < 5
-                   , swiftfizz
-                   , QuickCheck   
-                   , hspec
-                   , semigroups
-                   , text         
-                   , primes        
-                   , basic-prelude 
-                   , MissingH
                    , arithmoi
+                   , basic-prelude
+                   , hspec
+                   , MissingH
+                   , QuickCheck
+                   , semigroups   
+                   , text         
+                   , swiftfizz
 
 benchmark swiftfizz-benchmark
   type:              exitcode-stdio-1.0
@@ -100,10 +99,9 @@ benchmark swiftfizz-benchmark
                    , FizzFib
   build-depends:     base >= 4.8 && < 5
                    , criterion
-                   , arithmoi
-                   , semigroups
-                   , MissingH
+--                   , arithmoi
+--                   , semigroups
+--                   , MissingH
                    , basic-prelude
-                   , text
+--                   , text
                    , swiftfizz
-                   , parallel
