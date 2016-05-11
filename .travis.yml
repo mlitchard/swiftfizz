@@ -32,14 +32,3 @@ script:
   - stack --version
   - stack test 
 
-# coveralls.io coverage reports
-# after_script:
-#   - "cabal install hpc-coveralls"
-#   - "hpc-coveralls count-von-count-tests --exclude-dir=tests --exclude-dir=src/Gyrid --display-report"
-
-notifications:
-  email: true
-    recipients:
-      - michael@schmong.org
-    on_success: change
-    on_failure: change
