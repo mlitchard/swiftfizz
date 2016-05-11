@@ -21,7 +21,7 @@ main = do
   hspec unitFib
   hspec unitInput
   hspec $ propFib upper_bound
-  hspec propFizz
+  hspec $ propFizz upper_bound
 
 upper_bound :: Int
 upper_bound = 100000

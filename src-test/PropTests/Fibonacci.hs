@@ -18,13 +18,14 @@ import PropTests.PropImports
 propFib :: Int -> Spec
 propFib ub = do
   describe "QuickCheck test fibonacci generator"   $
-    modifyMaxSuccess (const ub)                    $
+    modifyMaxSuccess (const maxS)                  $
     prop propMsg                                   $
     forAll fibNumber isFib
   where
     fibNumber = elements $ fibSeq ub
     propMsg   = "Lowerbound: 0 Upperbound: " <> showUB
     showUB = (unpack . show) ub
+    maxS   = (ub `div` 10) :: Int
 
 -- |
 -- This is a Fibonacci number tester I found here
