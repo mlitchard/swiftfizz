@@ -1,4 +1,4 @@
-https://travis-ci.org/mlitchard/swiftfizz.svg?branch=master
+[![BuildStatus](https://travis-ci.org/mlitchard/swiftfizz.svg?branch=master)](https://travis-ci.org/mlitchard/swiftfizz)
 swiftfizz
 ==========
 
