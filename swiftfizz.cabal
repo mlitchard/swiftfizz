@@ -87,7 +87,7 @@ test-suite swiftfizz-test
                    , primes        
                    , basic-prelude 
                    , MissingH
-                   , parallel      
+                   , arithmoi
 
 benchmark swiftfizz-benchmark
   type:              exitcode-stdio-1.0
