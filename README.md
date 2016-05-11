@@ -1,3 +1,4 @@
+https://travis-ci.org/mlitchard/swiftfizz.svg?branch=master
 swiftfizz
 ==========
 
