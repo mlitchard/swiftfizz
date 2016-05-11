@@ -10,8 +10,10 @@
 
 module PropTests.FizzBuzz ( propFizz ) where
 
-import           Data.Numbers.Primes (isPrime)
-import           PropTests.PropImports
+import Data.Numbers.Primes (isPrime)
+import Data.Text (unpack)
+ 
+import PropTests.PropImports
 
 -- |
 -- tests that FizzBuzz is doing the right thing
