@@ -11,6 +11,9 @@ With Docker
 
 With Stack
 
+
+Testing
+
         Tue May 10 23:29 2016 Time and Allocation Profiling Report  (Final)
 
            swiftfizz-exe +RTS -N -p -RTS 1000
