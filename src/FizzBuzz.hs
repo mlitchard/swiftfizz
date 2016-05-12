@@ -22,11 +22,13 @@ import Data.Semigroup (Option (..), option)
 import Math.NumberTheory.Primes.Testing (isPrime)
 import FizzFib
 
--- | 
+-- |
+--  
 fizzBuzzFib :: Int -> [Text]
 fizzBuzzFib ub = map fizzbuzz $ fibSeq ub
 
--- | Based on http://dave.fayr.am/posts/2012-10-4-finding-fizzbuzz.html
+-- | 
+-- Based on http://dave.fayr.am/posts/2012-10-4-finding-fizzbuzz.html
 -- optimized for scalability and maintainability
 fizzbuzz :: Integer -> Text
 fizzbuzz i =

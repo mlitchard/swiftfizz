@@ -2,10 +2,20 @@
 swiftfizz
 ==========
 
-Swiftfizz is an implementation of FizzBuzz, using the specification given in  
-https://gist.github.com/mookerji/ef85e76e8bbfb6539643
+Swiftfizz is an implementation of FizzBuzz, using the following specification:
 
-#To Use:  
+In the programming language of your choice, write a program
+generating the first n Fibonacci numbers F(n), printing ...
+* "Buzz" when F(n) is divisible by 3.
+* "Fizz" when F(n) is divisible by 5.
+* "BuzzFizz" when F(n) is prime.
+* the value F(n) otherwise.
+
+
+#To Use: 
+Follow these first three instructions and then either the secton for Docker
+or Stack.
+ 
 `cd $HOME`  
 `git clone git@github.com:mlitchard/swiftfizz.git`  
 `cd swiftfizz`  
