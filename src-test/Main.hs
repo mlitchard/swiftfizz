@@ -7,21 +7,9 @@
 module Main (main) where
 
 import BasicPrelude
-import Test.Hspec (hspec)
-
-import PropTests.Fibonacci
-import PropTests.FizzBuzz
-import UnitTests.Fibonacci
-import UnitTests.Input
 
 -- |
--- Tests are first divided up into unit and property tests
+-- Nothing yet
 main :: IO ()
 main = do
-  hspec unitFib
-  hspec unitInput
-  hspec $ propFib upper_bound
-  hspec $ propFizz upper_bound
-
-upper_bound :: Int
-upper_bound = 100000
+  print "Tests Not Implemented"

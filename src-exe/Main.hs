@@ -1,8 +1,6 @@
-import              BasicPrelude 
-import              FizzWrapper
+-- |
+-- Nothing to see yet
+import BasicPrelude
 
 main :: IO ()
-main = do 
-  input <- getArgs 
-  putStrLn $ fizzWrapper input 
-
+main = error ("Main not implemented") 

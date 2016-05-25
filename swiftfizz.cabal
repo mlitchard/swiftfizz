@@ -32,16 +32,8 @@ library
   other-extensions:   MonadComprehensions
                     , OverloadedStrings
   
-  exposed-modules: FizzWrapper 
-  other-modules:   FizzBuzz
-                 , FizzFib
-                 , FizzInput
-                 , FizzTypes
-
   build-depends:     base >= 4.8 && < 5
-                   , arithmoi
                    , basic-prelude
-                   , MissingH
                    , semigroups
                    , text     
 
@@ -60,6 +52,9 @@ test-suite swiftfizz-test
   type:                exitcode-stdio-1.0
   default-extensions:  NoImplicitPrelude
   other-extensions:    OverloadedStrings
+  main-is:             Main.hs
+  build-depends:     base >= 4.8 && < 5
+                   , basic-prelude
 
   default-language:   Haskell2010
   ghc-options: -Wall -Werror -O2 -Wall -threaded -rtsopts -with-rtsopts=-N
@@ -67,26 +62,8 @@ test-suite swiftfizz-test
                    , src-test
 
   main-is:           Main.hs
-  other-modules:     FizzBuzz
-                   , FizzFib
-                   , FizzInput
-                   , FizzTypes
-                   , PropTests.Fibonacci
-                   , PropTests.FizzBuzz
-                   , PropTests.PropImports
-                   , UnitTests.Fibonacci
-                   , UnitTests.Input
-                   , UnitTests.UnitImports
 
   build-depends:     base >= 4.8 && < 5
-                   , arithmoi
-                   , basic-prelude
-                   , hspec
-                   , MissingH
-                   , QuickCheck
-                   , semigroups   
-                   , text         
-                   , swiftfizz
 
 benchmark swiftfizz-benchmark
   type:              exitcode-stdio-1.0
@@ -95,13 +72,4 @@ benchmark swiftfizz-benchmark
   ghc-options: -Wall -rtsopts
   hs-source-dirs: src, src-benchmark
   main-is:           Main.hs
-  other-modules:     FizzBuzz  
-                   , FizzFib
   build-depends:     base >= 4.8 && < 5
-                   , criterion
---                   , arithmoi
---                   , semigroups
---                   , MissingH
-                   , basic-prelude
---                   , text
-                   , swiftfizz
